@@ -1,33 +1,29 @@
 --Variables
 local neuralI = peripheral.find("neuralI")
 
+
+
 --Functions
-function loadModules()
+function load_file(file)
+	
+	if (file ~= nil) then
+	
+		local ModF = io.open("", "r");
+		local Mods = textutils.unserialise(ModF:read("*a"));
 
-	local readAll = function(tabl)
-		for _, v in pairs(tabl) do
-			if (type(v) == "table") then
-				readAll(v)
-			elseif (type(v) == "string") then
-				os.loadAPI(v);
-			end
-		end
-	end
-	
-	local ModF = io.open("./Modules.txt", "r");
-	local Mods = textutils.unserialise(ModF:read("*a"));
-	
-	ModF:close()
+		ModF:close()
 	
 	
 
-function run()
+function abcdef()
 
 --Main
 if (not neuralI.hasModule("plethora:chat")) then
 	print("WARN: Chat recorder (plethora:chat) is recommended");
 end
 
-
+local temp = io.open("filePaths.txt", "r");
+filePaths = textutils.unserialise(temp:read("*a"));
+temp:close();
 
 while (true) do
