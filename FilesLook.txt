@@ -1,0 +1,13 @@
+{
+	orescan = {
+		path = "./Utilities/Glasses/orescan.lua",
+		required = {
+			"plethora:glasses",
+			"plethora:scanner",
+		},
+		optional = {
+			"plethora:introspection",
+			"plethora:sensor",
+		},
+	},
+}
