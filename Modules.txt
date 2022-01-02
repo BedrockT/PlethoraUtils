@@ -1,7 +1,0 @@
-{
-	Utils = {
-		Glasses = {
-			orescan = "./Utils/Glasses/orescan.lua",
-		},
-	},
-}
