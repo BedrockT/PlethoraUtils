@@ -69,7 +69,7 @@ local function scan()
 end
  
 --Render
-function render() 
+local function render() 
     while (true) do
 
         local meta = modules.getMetaOwner and modules.getMetaOwner();
@@ -99,32 +99,26 @@ function render()
         sleep(renderInterval); 
     end 
 end
-
-function startScan(bID)
     
-    for x = -scannerRange, scannerRange, 1 do
+for x = -scannerRange, scannerRange, 1 do
  
-        textBlock[x] = {};
-        blocks[x] = {};
+	textBlock[x] = {};
+	blocks[x] = {};
     
-        for z = -scannerRange, scannerRange, 1 do
+    for z = -scannerRange, scannerRange, 1 do
     
-            textBlock[x][z] = canvas.addText({ 0, 0 }, " ", 0xFFFFFFFF, size);
-            blocks[x][z] = { y = nil, block = nil };
+		textBlock[x][z] = canvas.addText({ 0, 0 }, " ", 0xFFFFFFFF, size);
+        blocks[x][z] = { y = nil, block = nil };
         
-        end
- 
-    end    
- 
-    canvas.addText({offsetX, offsetY}, "^", 0xFFFFFF90, size*2);
-    
-    if (bID ~= nil) then ores[bID] = true; modules.tell("scanning for " .. bID); end
+    end
 	
+end
+	
+canvas.addText({offsetX, offsetY}, "^", 0xFFFFFF90, size*2);    
+if (bID ~= nil) then ores[bID] = true; modules.tell("scanning for " .. bID); end
+coroutine.yield();
+while (true) do
+	scan()
+	render()
 	coroutine.yield();
-	while (true) do
-		scan()
-		render()
-		coroutine.yield();
-	end
-	
 end
