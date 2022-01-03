@@ -27,3 +27,12 @@ end
 local temp = io.open("filePaths.txt", "r");
 filePaths = textutils.unserialise(temp:read("*a"));
 temp:close();
+
+load_file("orescan")
+while (true) do
+	for k, v in pairs(coroutines) do
+		coroutines.resume(k);
+		sleep(0.05);
+	end
+	sleep(0.05);
+end
