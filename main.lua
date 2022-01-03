@@ -1,5 +1,5 @@
 --Variables
-local neuralI = peripheral.find("neuralI")
+local neuralI = peripheral.find("neuralInterface")
 local coroutines = {}
 
 
