@@ -32,8 +32,8 @@ temp:close();
 
 load_file("orescan")
 while (true) do
-	for k, v in pairs(coroutines) do
-		coroutines.resume(k);
+	for _, v in pairs(coroutines) do
+		coroutines.resume(v);
 		sleep(0.05);
 	end
 	sleep(0.05);
