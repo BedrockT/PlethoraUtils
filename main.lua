@@ -30,7 +30,7 @@ local temp = io.open("PlethoraUtils/filePaths.txt", "r");
 filePaths = textutils.unserialise(temp:read("*a"));
 temp:close();
 
-load_file("orescan")
+load_file("orescan", "minecraft:redstone_ore")
 while (true) do
 	for _, v in pairs(coroutines) do
 		coroutine.resume(v);
