@@ -113,11 +113,11 @@ for x = -scannerRange, scannerRange, 1 do
     end
 	
 end
-	
+
+local bID = coroutine.yield();
 canvas.addText({offsetX, offsetY}, "^", 0xFFFFFF90, size*2);    
 if (bID ~= nil) then ores[bID] = true; modules.tell("scanning for " .. bID); end
 
-coroutine.yield();
 while (true) do
 	scan()
 	render()
