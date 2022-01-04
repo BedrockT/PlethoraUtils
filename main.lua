@@ -4,7 +4,7 @@ local coroutines = {}
 
 
 --Functions
-function load_file(file)
+function load_file(file, args)
 	
 	if (file ~= nil and coroutines[file] == nil) then
 	
@@ -14,7 +14,9 @@ function load_file(file)
 		ModF:close();
 		
 		coroutines[file] = coroutine.create(Mod);
-		
+		if (args) then
+			coroutine.resume(coroutines[file]);
+		end
 	end
 end
 	
@@ -24,7 +26,7 @@ if (not neuralI.hasModule("plethora:chat")) then
 	print("WARN: Chat recorder (plethora:chat) is recommended");
 end
 
-local temp = io.open("filePaths.txt", "r");
+local temp = io.open("PlethoraUtils/filePaths.txt", "r");
 filePaths = textutils.unserialise(temp:read("*a"));
 temp:close();
 
