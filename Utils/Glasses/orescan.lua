@@ -40,28 +40,26 @@ local blocks = {};
    
 --Scan Blocks        
 local function scan()
-   	while (true) do
     
-		local scanned_blocks = modules.scan();
-        
-        for x = -scannerRange, scannerRange, 1 do
-           	for z = -scannerRange, scannerRange, 1 do
+	local scanned_blocks = modules.scan();
+	
+	for x = -scannerRange, scannerRange, 1 do
+    	for z = -scannerRange, scannerRange, 1 do
             
-                local by, block = 0;
+        	local by, block = 0;
             
-                for y = -scannerRange, scannerRange, 1 do
+            for y = -scannerRange, scannerRange, 1 do
  			
-					local scanned = scanned_blocks[scannerWidth ^ 2 * (x + scannerRange) + scannerWidth * (y + scannerRange) + (z + scannerRange) + 1]
+				local scanned = scanned_blocks[scannerWidth ^ 2 * (x + scannerRange) + scannerWidth * (y + scannerRange) + (z + scannerRange) + 1]
                     
-                    if (ores[scanned.name]) then
-                        block = scanned.name;
-                        by = y; 
-                    end
+                if (ores[scanned.name]) then
+                	block = scanned.name;
+                    by = y; 
+               	end
                     
-                    blocks[x][z].block = block;
-                    blocks[x][z].y = by;
-                    
-                end  
+                blocks[x][z].block = block;
+                blocks[x][z].y = by;
+                      
             end
         end
     sleep(scanInterval);
@@ -70,31 +68,29 @@ end
  
 --Render
 local function render() 
-    while (true) do
 
-        local meta = modules.getMetaOwner and modules.getMetaOwner();
-        local angle = meta and math.rad(-meta.yaw % 360) or math.rad(180);
+	local meta = modules.getMetaOwner and modules.getMetaOwner();
+    local angle = meta and math.rad(-meta.yaw % 360) or math.rad(180);
         
-        for x = -scannerRange, scannerRange, 1 do
-            for z = -scannerRange, scannerRange, 1 do
+    for x = -scannerRange, scannerRange, 1 do
+    	for z = -scannerRange, scannerRange, 1 do
             
-                local text = textBlock[x][z];
-                local block = blocks[x][z];
+        	local text = textBlock[x][z];
+            local block = blocks[x][z];
                 
-                if (block.block) then
-                    local px = math.cos(angle) * -x - math.sin(angle) * -z;
-                    local py = math.sin(angle) * -x + math.cos(angle) * -z;
+           	if (block.block) then
+           		local px = math.cos(angle) * -x - math.sin(angle) * -z;
+                local py = math.sin(angle) * -x + math.cos(angle) * -z;
                     
-                    local sx = math.floor(px * size * cellSize);
-                    local sy = math.floor(py * size * cellSize);
-                    text.setPosition(offsetX + sx, offsetY + sy);
+                local sx = math.floor(px * size * cellSize);
+                local sy = math.floor(py * size * cellSize);
+                text.setPosition(offsetX + sx, offsetY + sy);
                     
-                    text.setText(tostring(block.y));
-                    text.setColor(table.unpack(clrs[block.block]));
-                 else
-                    text.setText(" ");  
-                end 
-            end 
+                text.setText(tostring(block.y));
+                text.setColor(table.unpack(clrs[block.block]));
+            else
+           		text.setText(" ");  
+            end  
         end
         sleep(renderInterval); 
     end 
